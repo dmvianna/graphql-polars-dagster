@@ -12,3 +12,6 @@ wheels/
 # Jupyter
 *.ipynb
 .ipynb_checkpoints
+
+# Dagster droppings
+.tmp*
