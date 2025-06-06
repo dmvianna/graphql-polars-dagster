@@ -9,11 +9,9 @@ authors = [
 requires-python = ">=3.11"
 dependencies = [
     "dagster>=1.10.19",
+    "dagster-polars>=0.27.2",
     "polars>=1.30.0",
 ]
-
-[project.scripts]
-graphql-polars-example = "graphql_polars_example:main"
 
 [build-system]
 requires = ["hatchling"]
@@ -39,3 +37,10 @@ dev = [
     "pytest-watcher>=0.4.3",
     "ruff>=0.11.13",
 ]
+
+[tool.dagster]
+module_name = "example.definitions"
+code_location_name = "example"
+
+[tool.hatch.build.targets.wheel]
+packages = ["example"]
