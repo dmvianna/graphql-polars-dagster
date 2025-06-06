@@ -1,0 +1,41 @@
+[project]
+name = "graphql-polars-example"
+version = "0.1.0"
+description = "Example Dagster project using pola.rs and triggered by graphql"
+readme = "README.md"
+authors = [
+    { name = "Daniel Vianna", email = "1708810+dmvianna@users.noreply.github.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "dagster>=1.10.19",
+    "polars>=1.30.0",
+]
+
+[project.scripts]
+graphql-polars-example = "graphql_polars_example:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pyright]
+venv = ".venv"
+venvPath = "."
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--maxfail=2"
+testpaths = [
+    "tests"
+]
+
+[dependency-groups]
+dev = [
+    "dagster-webserver>=1.10.19",
+    "jupyter>=1.1.1",
+    "pyright>=1.1.401",
+    "pytest>=8.4.0",
+    "pytest-watcher>=0.4.3",
+    "ruff>=0.11.13",
+]
