@@ -1,25 +1,26 @@
+from pathlib import Path
+
 import dagster as dg
+import polars as pl
+
+fixtures_path = Path(Path(__file__).parent, "..", "tests", "fixtures")
 
 
-@dg.asset(io_manager_key="polars_csv_io_manager")
-def sales_data():
-    return dg.SourceAsset(
-        ["sales_data.csv"],
-        io_manager_key="polars_csv_io_manager",
-    )
+@dg.asset
+def sales_csv() -> pl.LazyFrame:
+    return pl.scan_csv(fixtures_path / Path("sales_data.csv"))
 
 
-@dg.asset(io_manager_key="polars_csv_io_manager")
-def sales_reps():
-    return dg.SourceAsset(
-        ["sales_reps.csv"],
-        io_manager_key="polars_csv_io_manager",
-    )
+@dg.asset
+def reps_csv() -> pl.LazyFrame:
+    return pl.scan_csv(fixtures_path / Path("sales_reps.csv"))
 
 
-@dg.asset(io_manager_key="polars_csv_io_manager")
-def products():
-    return dg.SourceAsset(
-        ["products.csv"],
-        io_manager_key="polars_csv_io_manager",
-    )
+@dg.asset
+def products_csv() -> pl.LazyFrame:
+    return pl.scan_csv(fixtures_path / Path("products.csv"))
+
+
+@dg.asset(deps=[sales_csv], io_manager_key="polars_csv_io_manager")
+def sales_data(sales_csv: pl.LazyFrame) -> None:
+    return sales_csv.sink_csv(fixtures_path / Path("sales_sink.csv"))
