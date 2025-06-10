@@ -19,3 +19,6 @@ wheels/
 # Polars droppings
 **/fixtures/*
 !**/fixtures/*.csv
+
+# Environment variables
+.env
