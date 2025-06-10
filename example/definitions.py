@@ -10,6 +10,6 @@ example_assets = dg.load_assets_from_modules([assets])
 defs = dg.Definitions(
     assets=example_assets,
     resources={
-        "lazy_csv_manager": LazyCsvManager(root_path=str(root_path)),
+        "io_manager": LazyCsvManager(root_path=str(root_path)),
     },
 )
