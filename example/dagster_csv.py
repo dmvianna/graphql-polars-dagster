@@ -7,7 +7,9 @@ class LazyCsvManager(ConfigurableIOManager):
     root_path: str
 
     def _get_path(self, context: InputContext | OutputContext) -> UPath:
-        return UPath(self.root_path).joinpath(UPath(context.asset_key.to_user_string()))
+        return UPath(self.root_path).joinpath(
+            UPath(context.asset_key.to_user_string() + ".csv")
+        )
 
     def handle_output(self, context: OutputContext, obj: pl.LazyFrame) -> None:
         return obj.sink_csv(self._get_path(context))
