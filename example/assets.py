@@ -24,10 +24,12 @@ def products_csv() -> pl.LazyFrame:
 
 
 @dg.asset
-def sales_sink(sales_csv: pl.LazyFrame) -> None:
-    """
-    Notice that because we are using an IO manager, we do not need to
-    define the dependency in the decorator. We just use its name in an
-    argument and we are good to go!
-    """
-    return sales_csv.sink_csv(root_path / Path("sales_sink.csv"))
+def intermediate(sales_csv: pl.LazyFrame) -> pl.LazyFrame:
+    return sales_csv.with_columns(
+        (pl.col("dollar_amount") * pl.col("quantity")).alias("total_amount")
+    )
+
+
+@dg.asset
+def sales_sink(intermediate: pl.LazyFrame) -> None:
+    return intermediate.sink_csv(root_path / Path("sales_sink.csv"))
