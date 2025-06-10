@@ -4,23 +4,23 @@ import dagster as dg
 import polars as pl
 from upath import UPath
 
-default_root_path = Path(Path(__file__).parent, "..", "tests", "fixtures").__str__()
+default_root_path = Path(Path(__file__).parent, "..", "tests").__str__()
 root_path: UPath = UPath(dg.EnvVar("ROOT_PATH").get_value(default_root_path))
 
 
 @dg.asset
 def reps_csv() -> pl.LazyFrame:
-    return pl.scan_csv(root_path / Path("sales_reps.csv"))
+    return pl.scan_csv(root_path / "fixtures" / "sales_reps.csv")
 
 
 @dg.asset
 def sales_csv() -> pl.LazyFrame:
-    return pl.scan_csv(root_path / Path("sales_data.csv"))
+    return pl.scan_csv(root_path / "fixtures" / "sales_data.csv")
 
 
 @dg.asset
 def products_csv() -> pl.LazyFrame:
-    return pl.scan_csv(root_path / Path("products.csv"))
+    return pl.scan_csv(root_path / "fixtures" / "products.csv")
 
 
 @dg.asset
