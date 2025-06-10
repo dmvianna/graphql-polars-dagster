@@ -22,5 +22,5 @@ def products_csv() -> pl.LazyFrame:
 
 
 @dg.asset(deps=[sales_csv], io_manager_key="polars_csv_io_manager")
-def sales_data(sales_csv: pl.LazyFrame) -> None:
+def sales_sink(sales_csv: pl.LazyFrame) -> None:
     return sales_csv.sink_csv(fixtures_path / Path("sales_sink.csv"))
