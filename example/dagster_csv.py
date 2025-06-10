@@ -3,10 +3,6 @@ from dagster import ConfigurableIOManager, InputContext, OutputContext
 from upath import UPath
 
 
-class PathError(Exception):
-    pass
-
-
 class LazyCsvManager(ConfigurableIOManager):
     root_path: str
 
