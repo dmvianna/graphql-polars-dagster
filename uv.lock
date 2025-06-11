@@ -592,6 +592,7 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "dagster-graphql" },
     { name = "dagster-webserver" },
     { name = "jupyter" },
     { name = "pyright" },
@@ -609,6 +610,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "dagster-graphql", specifier = ">=1.10.19" },
     { name = "dagster-webserver", specifier = ">=1.10.19" },
     { name = "jupyter", specifier = ">=1.1.1" },
     { name = "pyright", specifier = ">=1.1.401" },

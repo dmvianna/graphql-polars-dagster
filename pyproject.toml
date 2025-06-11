@@ -30,6 +30,7 @@ testpaths = [
 
 [dependency-groups]
 dev = [
+    "dagster-graphql>=1.10.19",
     "dagster-webserver>=1.10.19",
     "jupyter>=1.1.1",
     "pyright>=1.1.401",
